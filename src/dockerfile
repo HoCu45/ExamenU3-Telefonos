@@ -1,7 +1,7 @@
 #stage 1: install dependencies
 FROM oven/bun:1-alpine AS deps
 
-#crea el grupoy usuario en el stage 'deps'
+#crea el grupoy Telefonos en el stage 'deps'
 RUN addgroup -S bunuser &&adduser -S -D -H -h /dev/null -s /sbin/nologin -G bunuser bunuser
 
 WORKDIR /app
@@ -11,7 +11,7 @@ RUN bun install --frozen-lockfile --production
 #Stage 2: BUild application
 FROM oven/bun:1-alpine AS builder
 
-#Crea el grupo y usuario en el stage 'builder'
+#Crea el grupo y Telefonos en el stage 'builder'
 RUN addgroup -S bunuser && adduser -S -D -H -h /dev/null -s /sbin/nologin -G bunuser bunuser
 
 WORKDIR /app
@@ -23,7 +23,7 @@ RUN bun build ./index.ts --outdir ./dist --target bun
 
 FROM oven/bun:1-alpine AS production
 
-#Crea el grupo y usuario en el stage 'production'
+#Crea el grupo y Telefonos en el stage 'production'
 
 RUN addgroup -S bunuser && adduser -S -D -H -h /dev/null -s /sbin/nologin -G bunuser bunuser
 

@@ -1,5 +1,6 @@
-CREATE TABLE usuario (
+CREATE TABLE Telefonos (
     id SERIAL PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(150) NOT NULL UNIQUE
+    Marca VARCHAR(100) NOT NULL,
+    Modelo VARCHAR(150) NOT NULL,
+    Color VARCHAR(50),
 );

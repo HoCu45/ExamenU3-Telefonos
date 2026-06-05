@@ -1,7 +1,7 @@
 //INPUT PORT 
-//ELIMINAR USUARIO
+//ELIMINAR Telefonos
 
-export interface IEliminarUsuarioUseCase {
+export interface IEliminarTelefonosUseCase {
 
     execute(
         id:number

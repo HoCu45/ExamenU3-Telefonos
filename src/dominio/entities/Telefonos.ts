@@ -2,8 +2,8 @@
 
 //DOMAIN - ENTIDAD RICA BLINDADA
 
-export class Usuario {
-    //1. CONSTRUCTOR PRIVADO: nadie desde fuera puede hacer 'new Usuario(...)'
+export class Telefonos {
+    //1. CONSTRUCTOR PRIVADO: nadie desde fuera puede hacer 'new Telefonos(...)'
 private constructor(
     public readonly id: number| null,
     private _nombre: string,
@@ -15,25 +15,25 @@ private constructor(
 get nombre(): string { return this._nombre; }
 get email(): string { return this._email; }
 
-//2. Metodo de fábrica: para crear usuarios NUEVOS (Sin ID aún)
+//2. Metodo de fábrica: para crear Telefonoss NUEVOS (Sin ID aún)
 
-static crear(nombre: string, email: string): Usuario {
+static crear(nombre: string, email: string): Telefonos {
     // Validaciones estrictas en el nacimiento
     if (!email || !email.includes("@")) {
-        throw new Error("El formato del email es invalido para el nuevo usuario");
+        throw new Error("El formato del email es invalido para el nuevo Telefonos");
     }
     if (!nombre || nombre.trim().length < 2) {
         throw new Error("El nombre debe tener al menos 2 caracteres");
     }
 
     //Si todo está bien, la propia clase puede invocar a su constructor privado
-    return new Usuario(null, nombre.trim(), email.trim());
+    return new Telefonos(null, nombre.trim(), email.trim());
 }
 
-//3. Metodo de fabrica: para reconstruir usuarios que ya existen en postgreSQL
-static reconstruir(id: number, nombre: string, email: string): Usuario {
+//3. Metodo de fabrica: para reconstruir Telefonoss que ya existen en postgreSQL
+static reconstruir(id: number, nombre: string, email: string): Telefonos {
     //Aqui no validamos las reglas de creación porque el dato ya es confiable ( viene de la DB)
-    return new Usuario(id, nombre, email);
+    return new Telefonos(id, nombre, email);
 }
 
 //4. comportamiento: el único punto para modificar el estado

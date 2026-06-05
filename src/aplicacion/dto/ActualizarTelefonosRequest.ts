@@ -1,4 +1,4 @@
-export class ActualizarUsuarioRequest {
+export class ActualizarTelefonosRequest {
 
     constructor (
         public id: number,

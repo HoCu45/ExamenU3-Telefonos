@@ -4,24 +4,24 @@
 
 import { db } from "./infraestructura/database/postgress";
 
-import { UsuarioRepositoryImpl }
-from "./infraestructura/adaptadores/output/postgres_sql/UsuarioRepositoryImpl";
+import { TelefonosRepositoryImpl }
+from "./infraestructura/adaptadores/output/postgres_sql/TelefonosRepositoryImpl";
 
-import { UsuarioService }
-from "./aplicacion/services/UsuarioService";
+import { TelefonosService }
+from "./aplicacion/services/TelefonosService";
 
-import { UsuarioController }
-from "./infraestructura/adaptadores/input/http/UsuarioController";
-import { EliminarUsuarioUseCase } from "./aplicacion/caso_uso/EliminarUsuarioUseCase"
-import { ActualizarUsuarioUseCase } from
-"./aplicacion/caso_uso/ActualizarUsuarioUseCase";
-import { CrearUsuariosUseCase } from "./aplicacion/caso_uso/CrearUsuarioUseCase";
-import { ObtenerUsuariosUseCase } from
-"./aplicacion/caso_uso/ObtenerUsuarioUseCase";
-import { ListarUsuariosUseCase } from
-"./aplicacion/caso_uso/ListarUsuarioUseCase";
-import { CreateUsuarioRequest } from "./aplicacion/dto/CreateUsuarioRequest";
-import { ActualizarUsuarioRequest } from "./aplicacion/dto/ActualizarUsuarioRequest";
+import { TelefonosController }
+from "./infraestructura/adaptadores/input/http/TelefonosController";
+import { EliminarTelefonosUseCase } from "./aplicacion/caso_uso/EliminarTelefonosUseCase"
+import { ActualizarTelefonosUseCase } from
+"./aplicacion/caso_uso/ActualizarTelefonosUseCase";
+import { CrearTelefonossUseCase } from "./aplicacion/caso_uso/CrearTelefonosUseCase";
+import { ObtenerTelefonossUseCase } from
+"./aplicacion/caso_uso/ObtenerTelefonosUseCase";
+import { ListarTelefonossUseCase } from
+"./aplicacion/caso_uso/ListarTelefonosUseCase";
+import { CreateTelefonosRequest } from "./aplicacion/dto/CreateTelefonosRequest";
+import { ActualizarTelefonosRequest } from "./aplicacion/dto/ActualizarTelefonosRequest";
 
 /*
 
@@ -29,8 +29,8 @@ DEPENDENCY INJECTION
 
 */
 
-const usuarioRepository =
-new UsuarioRepositoryImpl (db);
+const TelefonosRepository =
+new TelefonosRepositoryImpl (db);
 
 /*
 
@@ -38,42 +38,42 @@ USE CASE INSTANCES
 
 */
 
-const crearUsuarioUseCase =
+const crearTelefonosUseCase =
 
-new CrearUsuariosUseCase (
+new CrearTelefonossUseCase (
 
-usuarioRepository
+TelefonosRepository
 );
 
-const obtenerUsuarioUseCase =
+const obtenerTelefonosUseCase =
 
-new ObtenerUsuariosUseCase (
+new ObtenerTelefonossUseCase (
 
-usuarioRepository
-
-);
-
-const listarUsuariosUseCase =
-
-new ListarUsuariosUseCase (
-
-usuarioRepository
+TelefonosRepository
 
 );
 
-const actualizarUsuarioUseCase =
+const listarTelefonossUseCase =
 
-new ActualizarUsuarioUseCase (
+new ListarTelefonossUseCase (
 
-usuarioRepository
+TelefonosRepository
 
 );
 
-const eliminarUsuarioUseCase =
+const actualizarTelefonosUseCase =
 
-new EliminarUsuarioUseCase (
+new ActualizarTelefonosUseCase (
 
-usuarioRepository
+TelefonosRepository
+
+);
+
+const eliminarTelefonosUseCase =
+
+new EliminarTelefonosUseCase (
+
+TelefonosRepository
 
 );
 
@@ -85,27 +85,27 @@ SERVICE INSTANCE
 
 
 
-const usuarioService =
+const TelefonosService =
 
-new UsuarioService (
+new TelefonosService (
 
-crearUsuarioUseCase,
+crearTelefonosUseCase,
 
-obtenerUsuarioUseCase,
+obtenerTelefonosUseCase,
 
-listarUsuariosUseCase,
+listarTelefonossUseCase,
 
-actualizarUsuarioUseCase,
+actualizarTelefonosUseCase,
 
-eliminarUsuarioUseCase
+eliminarTelefonosUseCase
 
 );
 
-const usuarioController =
+const TelefonosController =
 
-new UsuarioController(
+new TelefonosController(
 
-    usuarioService
+    TelefonosService
 
 );
 
@@ -162,28 +162,28 @@ const server = Bun.serve({
 
             /*
 
-            usuarios
+            Telefonoss
 
             */
 
-            if (pathname === "/usuarios") {
+            if (pathname === "/Telefonoss") {
 
                 /*
 
-                get /usuarios
+                get /Telefonoss
 
                 */
 
                 if (method === "GET") {
-                    const usuarios = 
-                        await usuarioController.listarUsuarios();
+                    const Telefonoss = 
+                        await TelefonosController.listarTelefonoss();
 
-                    return json(usuarios);
+                    return json(Telefonoss);
                 }
 
                 /*
 
-                POST /usuarios
+                POST /Telefonoss
 
                 */
 
@@ -216,15 +216,15 @@ const server = Bun.serve({
 
                     /*
 
-                    CREAR USUARIO
+                    CREAR Telefonos
 
                     */
 
-                    const dtoUser = new CreateUsuarioRequest(nombre, email);
-                    const usuario= 
-                        await usuarioController.crearUsuario(dtoUser);
+                    const dtoUser = new CreateTelefonosRequest(nombre, email);
+                    const Telefonos= 
+                        await TelefonosController.crearTelefonos(dtoUser);
 
-                    return json (usuario, 201);
+                    return json (Telefonos, 201);
                 }
 
                 /*
@@ -243,11 +243,11 @@ const server = Bun.serve({
 
             /*
 
-            /usuarios/id
+            /Telefonoss/id
 
             */
 
-            if (pathname.startsWith("/usuarios/")) {
+            if (pathname.startsWith("/Telefonoss/")) {
 
                 /*
 
@@ -274,30 +274,30 @@ const server = Bun.serve({
                 }
                 /*
 
-                GET /usuarios/id
+                GET /Telefonoss/id
 
                 */
 
                 if(method==="GET") {
                     
-                    const usuario = await usuarioController.obtenerUsuario(id);
+                    const Telefonos = await TelefonosController.obtenerTelefonos(id);
 
-                    if (!usuario) {
+                    if (!Telefonos) {
 
                         return json(
                         {
-                            error: "usuario no encontrado",
+                            error: "Telefonos no encontrado",
                         },
                         400
                     );
                     }
 
-                    return json(usuario);
+                    return json(Telefonos);
                 }
 
                 /*
 
-                PUT /usuarios/id
+                PUT /Telefonoss/id
 
                 */
 
@@ -331,11 +331,11 @@ const server = Bun.serve({
 
                 try {
 
-                    const dtoActualizarUsuario = new ActualizarUsuarioRequest(id, nombre, email);
+                    const dtoActualizarTelefonos = new ActualizarTelefonosRequest(id, nombre, email);
 
-                    const usuario = await usuarioController.actualizarUsuario(dtoActualizarUsuario);
+                    const Telefonos = await TelefonosController.actualizarTelefonos(dtoActualizarTelefonos);
                 
-                    return json(usuario);
+                    return json(Telefonos);
                 } catch (error: any) {
 
                     return json (
@@ -349,29 +349,29 @@ const server = Bun.serve({
 
             /*
 
-            DELETE /usuarios/:ID
+            DELETE /Telefonoss/:ID
 
             */
 
             if (method === "DELETE") {
 
                 try {
-                    const usuario = await usuarioController.obtenerUsuario(id );
+                    const Telefonos = await TelefonosController.obtenerTelefonos(id );
 
-                if (!usuario) {
+                if (!Telefonos) {
                     return json(
                         {
-                            error: "usuario no encontrado",
+                            error: "Telefonos no encontrado",
                         },
                         404
                     );
                 }
 
-                await usuarioController.eliminarUsuario(id);
+                await TelefonosController.eliminarTelefonos(id);
 
                 return json ({
-                    message: "usuario eliminado",
-                    usuario,
+                    message: "Telefonos eliminado",
+                    Telefonos,
                 });
 
                 } catch (error: any) {
