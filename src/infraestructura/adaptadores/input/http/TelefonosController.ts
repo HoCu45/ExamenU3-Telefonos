@@ -36,10 +36,10 @@ export class TelefonosController {
         return Telefonos;
     };
 
-    listarTelefonoss = async () => {
-        const Telefonoss = await this.TelefonosService.listarTelefonoss();
+    listarTelefonos = async () => {
+        const Telefonos = await this.TelefonosService.listarTelefonoss();
 
-        return Telefonoss;
+        return Telefonos;
     };
 
     actualizarTelefonos = async ( dtoActualizarTelefonos: ActualizarTelefonosRequest) => {

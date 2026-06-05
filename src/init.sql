@@ -2,5 +2,4 @@ CREATE TABLE Telefonos (
     id SERIAL PRIMARY KEY,
     Marca VARCHAR(100) NOT NULL,
     Modelo VARCHAR(150) NOT NULL,
-    Color VARCHAR(50),
 );

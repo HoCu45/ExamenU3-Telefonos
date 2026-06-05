@@ -85,7 +85,7 @@ SERVICE INSTANCE
 
 
 
-const TelefonosService =
+const TelefonossService =
 
 new TelefonosService (
 
@@ -101,11 +101,11 @@ eliminarTelefonosUseCase
 
 );
 
-const TelefonosController =
+const TelefonossController =
 
 new TelefonosController(
 
-    TelefonosService
+    TelefonossService
 
 );
 
@@ -176,7 +176,7 @@ const server = Bun.serve({
 
                 if (method === "GET") {
                     const Telefonoss = 
-                        await TelefonosController.listarTelefonoss();
+                        await TelefonossController.listarTelefonos();
 
                     return json(Telefonoss);
                 }
@@ -222,7 +222,7 @@ const server = Bun.serve({
 
                     const dtoUser = new CreateTelefonosRequest(nombre, email);
                     const Telefonos= 
-                        await TelefonosController.crearTelefonos(dtoUser);
+                        await TelefonossController.crearTelefonos(dtoUser);
 
                     return json (Telefonos, 201);
                 }
@@ -280,7 +280,7 @@ const server = Bun.serve({
 
                 if(method==="GET") {
                     
-                    const Telefonos = await TelefonosController.obtenerTelefonos(id);
+                    const Telefonos = await TelefonossController.obtenerTelefonos(id);
 
                     if (!Telefonos) {
 
@@ -333,7 +333,7 @@ const server = Bun.serve({
 
                     const dtoActualizarTelefonos = new ActualizarTelefonosRequest(id, nombre, email);
 
-                    const Telefonos = await TelefonosController.actualizarTelefonos(dtoActualizarTelefonos);
+                    const Telefonos = await TelefonossController.actualizarTelefonos(dtoActualizarTelefonos);
                 
                     return json(Telefonos);
                 } catch (error: any) {
@@ -356,7 +356,7 @@ const server = Bun.serve({
             if (method === "DELETE") {
 
                 try {
-                    const Telefonos = await TelefonosController.obtenerTelefonos(id );
+                    const Telefonos = await TelefonossController.obtenerTelefonos(id );
 
                 if (!Telefonos) {
                     return json(
@@ -367,7 +367,7 @@ const server = Bun.serve({
                     );
                 }
 
-                await TelefonosController.eliminarTelefonos(id);
+                await TelefonossController.eliminarTelefonos(id);
 
                 return json ({
                     message: "Telefonos eliminado",
